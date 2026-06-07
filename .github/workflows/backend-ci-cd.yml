@@ -47,6 +47,14 @@ jobs:
       - name: Build Docker Image
         run: |
           docker build -t muchtodo .
+          
+      - name: Scan Docker Image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: muchtodo
+          format: table
+          exit-code: 0
+          severity: HIGH,CRITICAL
 
       - name: Tag Image
         run: |
