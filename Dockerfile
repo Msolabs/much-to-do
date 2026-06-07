@@ -1,16 +1,21 @@
-FROM golang:1.22-alpine
+FROM golang:1.25.1-alpine AS builder
 
 WORKDIR /app
 
-# Copy go modules first (better caching)
-COPY go.mod go.sum ./
+COPY Server/MuchToDo/go.mod Server/MuchToDo/go.sum ./
+WORKDIR /app
+
 RUN go mod download
 
-# Copy entire project
-COPY . .
+COPY Server/MuchToDo/ .
 
-# Build the API
 RUN go build -o api ./cmd/api
+
+FROM alpine:3.19
+
+WORKDIR /app
+
+COPY --from=builder /app/api .
 
 EXPOSE 8080
 

@@ -52,7 +52,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not load config: %v", err)
 	}
+
 	fmt.Println("MONGO URI =", cfg.MongoURI)
+
+	fmt.Printf("ALLOWED ORIGINS = %#v\n", cfg.AllowedOrigins)
 
 	// --- Logger ---
 	// This must be initialized before any other component that might log.

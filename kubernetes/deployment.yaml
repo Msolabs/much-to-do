@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: muchtodo-api
+  namespace: muchtodo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: muchtodo-api
+  template:
+    metadata:
+      labels:
+        app: muchtodo-api
+    spec:
+      containers:
+        - name: api
+          image: muchtodo:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: muchtodo-config
+            - secretRef:
+                name: muchtodo-secret

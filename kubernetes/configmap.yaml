@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: muchtodo-config
+  namespace: muchtodo
+data:
+  PORT: "8080"
+  DB_NAME: "owoson2012_db_user"
+  ENABLE_CACHE: "false"
+  LOG_LEVEL: "DEBUG"
+  LOG_FORMAT: "json"
